@@ -230,8 +230,8 @@ function validateLetter(){
 				showLetter(letter, 50, 485);
 				correctLetters.push(letter);
 			}else{
-				showWrongLetters(300, 50);
 				wrongLetters.push(letter);
+				showWrongLetters(300, 50);
 				mistakes++;
 				validateMistakes(mistakes);
 			}
