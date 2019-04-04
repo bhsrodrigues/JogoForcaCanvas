@@ -2,33 +2,12 @@ var canvas = document.querySelector("#game");
 var context = canvas.getContext("2d");
 
 function background(fullClean){
-	
 
-	context.fillStyle="white";
-	context.strokeStyle = "black";
-	context.lineWidth = 1;
-
-	if (!fullClean){
-		context.fillRect(0,0,800,400);
-	}else{
-		context.fillRect(0,0,800,600);	
-		
-	}
-
-	context.fillStyle = "black";
-
-	context.fillRect(50,30,20,300);
-		
-	context.fillRect(50,30,150,20);
-		
-	context.fillRect(200,30,20,60);
-
-	context.strokeRect(0,0,800,600);
-	
+	drawGibbet(fullClean);
 	
 }
 
-function drawHead(){
+/*function drawHead(){
 	
 	context.fillStyle = "white";
 	context.strokeStyle = "black";
@@ -49,7 +28,7 @@ function drawHead(){
 
 	
 	
-}
+}*/
 
 
 function drawBody(){
@@ -457,7 +436,7 @@ function drawFaceSix(){
 }
 
 function drawDeadFace(){
-	drawHead();
+	drawHead(210, 110);
 
 
 	var size = 0;
@@ -500,31 +479,25 @@ function drawDeadFace(){
 }
 
 function validateMistakes(mistakes){
+	drawHead(210, 110);
 	if (mistakes == 1){
-		drawHead();
 		drawFaceOne();
 	}else if (mistakes == 2){
 		drawBody();
-		drawHead();
 		drawFaceTwo();
 	}else if (mistakes == 3){
 		drawArm(mistakes);
-		drawHead();
 		drawFaceThree();
 	}else if(mistakes == 4){
 		drawArm(mistakes);
-		drawHead();
 		drawFaceFour();
 	}else if(mistakes == 5){
 		drawLeg(mistakes);
-		drawHead();
 		drawFaceFive();
 	}else if (mistakes == 6){
 		drawLeg(mistakes);
-		drawHead();
 		drawFaceSix();
 	}else{
-		drawHead();
 		drawDeadFace();
 		alert("Infelizmente você perdeu. Tente em outro jogo");
 		disableLetterField(true);
