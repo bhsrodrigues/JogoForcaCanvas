@@ -7,47 +7,7 @@ function background(fullClean){
 	
 }
 
-/*function drawHead(){
-	
-	context.fillStyle = "white";
-	context.strokeStyle = "black";
-	context.lineWidth = 1;
-	
-	context.beginPath();
-	context.arc(210,110,25,0,2 * Math.PI);
-	context.fill();
-	context.stroke();
-	
-	context.beginPath();
-	context.arc(200,100,1,0,2 * Math.PI);
-	context.stroke();
-	
-	context.beginPath();
-	context.arc(220,100,1,0,2 * Math.PI);
-	context.stroke();
-
-	
-	
-}*/
-
-
-function drawBody(){
-	
-	context.fillStyle = "black";
-	context.fillRect(206,135,5,100);
-}
-
-function drawArm(errors){
-	
-	position(206, 155, 230, errors);
-}
-
-
-function drawLeg(errors){
-	
-	position(206, 235, 310, errors);
-}
-
+//TODO Remover função após passar corpo com sucesso
 function position(x, y, newY, errors){
 	var value = 35;
 	
@@ -79,7 +39,7 @@ function selecionarPalavras(){
 	mistakes = 0;
 	lettersOK = 0;
 	
-	var comboitem = document.querySelector("select").value;
+	var comboitem = document.querySelector("select").value.toLowerCase();
 	var selectedItem;
 	
 	if (comboitem == "" ){
@@ -87,18 +47,20 @@ function selecionarPalavras(){
 		document.querySelector("#letter").disabled=true;
 		document.querySelector("#sendletter").disabled=true;
 	}else{
-		if (comboitem == "books"){
+		if (comboitem == "livros"){
 			selectedItem = books;
-		}else if (comboitem == "bands"){
+		}else if (comboitem == "bandas"){
 			selectedItem = bands;
 		}else{
 			selectedItem = movies;
 		}
+
+		alert(comboitem);
 		
 		console.log(selectedItem);
 		
 		word = getWord(selectedItem);
-		drawWord(word);
+		drawWordFields(word);
 		allLetters = [];
 		wrongLetters = [];
 		lettersOK = [];
@@ -109,46 +71,18 @@ function selecionarPalavras(){
 		disableLetterField(false);
 		document.querySelector("#gameoptions").disabled = true;
 		disableStartButton(true);
+
+		document.querySelector("#letter").focus();
 		
 	}
-	
-	
 	
 }
 
 function getWord(selectedItem){
 	
-	
 	var item = selectedItem[Math.floor(Math.random() * selectedItem.length)];
 	
-	console.log(item)
-	
 	return item;
-}
-
-function clearWord(){
-	context.fillStyle = "white";
-	context.fillRect(50,500,650,80);
-}
-
-function drawWord(selectedWord){
-	
-	var position = 50;
-	clearWord();
-	
-	for (var x = 0; x < selectedWord.length; x++){
-		
-		if (selectedWord.charAt(x) == " "){
-			context.fillStyle = "white";
-		}else{
-			context.fillStyle = "black";
-		}
-		
-		context.fillRect(position,500,21,5);
-		position += 26;
-		
-	}
-	
 }
 
 var allLetters = [];
@@ -162,30 +96,8 @@ function validateNotAcceptableChar(letter){
 	return notAcceptable.includes(letter);
 }
 
-function removeChars(){
-	var totalItens = 0;
-	for(var x = 0; x < word.length; x++){
-		console.log("Achou item");
-		if ((word.charAt(x) == " ") || (word.charAt(x) == " ") || (word.charAt(x) == " ")){
-			totalItens++;
-		}
-	}
-
-	var tempWord = word;
-
-	var count = 0;
-	while(count < totalItens){
-		tempWord = tempWord.replace(" ","").replace("-","",).replace("_","");
-		count++;
-	}
-
-	console.log(tempWord);
-
-	return tempWord;
-}
-
 function validateLetter(){
-	var gameWord = removeChars();
+	var gameWord = removeChars(word);
 
 	console.log(gameWord);
 	
@@ -235,70 +147,6 @@ function validateLetter(){
 
 	document.querySelector("#letter").value = "";
 	document.querySelector("#letter").focus();
-	
-
-}
-
-function drawWinGame(){
-	context.fillStyle = "white";
-	context.strokeStyle = "black";
-	context.lineWidth = 1;
-	
-	context.beginPath();
-	context.arc(210,150,25,0,2 * Math.PI);
-	context.fill();
-	context.stroke();
-	
-	context.beginPath();
-	context.arc(200,140,1,0,2 * Math.PI);
-	context.stroke();
-	
-	context.beginPath();
-	context.arc(220,140,1,0,2 * Math.PI);
-	context.stroke();
-
-	//drawFaceOne();
-
-	context.strokeStyle = "black";
-	
-	context.beginPath();
-	context.moveTo(195, 150);
-	context.bezierCurveTo(195,165,225,165,225,150);
-	context.stroke();
-	
-	context.beginPath();
-	context.moveTo(195, 150);
-	context.bezierCurveTo(195,170,225,170,225,150);
-	context.stroke();
-	
-	context.beginPath();
-	context.moveTo(195, 150);
-	context.bezierCurveTo(195,175,225,175,225,150);
-	context.stroke();
-	
-	context.lineWidth = 1;
-	context.beginPath();
-	context.moveTo(203, 160);
-	context.lineTo(203, 166);
-	context.moveTo(210, 160);
-	context.lineTo(210, 168);
-	context.moveTo(218, 160);
-	context.lineTo(218, 166);
-	context.stroke();
-
-	context.fillStyle = "#000";
-	context.fillRect(206,175,5,100);
-
-
-	position(206, 200, 176, 0);
-
-	position(206, 200, 176, 1);
-
-	position(206, 274, 320, 0);
-
-	position(206, 274, 320, 1);
-
-	
 }
 
 function showWrongLetters(x, y){
@@ -321,28 +169,22 @@ function showWrongLetters(x, y){
 function showLetter(letter, x, y){
 		
 	for (var charIndex = 0; charIndex < word.length; charIndex++){
-		
-		//console.log(word.toLowerCase().charAt(x));
+	
 		if (word.toLowerCase().charAt(charIndex) == letter){
 			context.font = "20px Arial";
 			context.fillStyle = "black";
 			context.fillText(letter.toUpperCase(), x + 2, y);
 			context.fillRect(x,y+15,21,5);
 			lettersOK++;
-			//console.log(lettersOK)
 		}
-		
-		
 		x += 26;
-		
 	}
-	
 }
 
 var mistakes = 0;
 var lettersOK;
 
-function drawFaceOne(){
+/*function drawFaceOne(){
 	//context.fillStyle = "white";
 	context.strokeStyle = "black";
 	
@@ -370,120 +212,61 @@ function drawFaceOne(){
 	context.moveTo(218, 120);
 	context.lineTo(218, 126);
 	context.stroke();
-}
+}*/
 
-function drawFaceTwo(){
-	context.beginPath();
-	context.moveTo(195, 110);
-	context.bezierCurveTo(195,130,225,130,225,110);
+function drawWinGame(){
+
+	drawHead(210,150);
+
+	context.strokeStyle = "black";
+	
+	/*context.beginPath();
+	context.moveTo(195, 150);
+	context.bezierCurveTo(195,165,225,165,225,150);
 	context.stroke();
-}
-
-function drawFaceThree(){
+	
+	context.beginPath();
+	context.moveTo(195, 150);
+	context.bezierCurveTo(195,170,225,170,225,150);
+	context.stroke();
+	
+	context.beginPath();
+	context.moveTo(195, 150);
+	context.bezierCurveTo(195,175,225,175,225,150);
+	context.stroke();
 	
 	context.lineWidth = 1;
 	context.beginPath();
-	context.moveTo(200, 122);
-	context.lineTo(220, 117);
-	context.stroke();
-}
+	context.moveTo(203, 160);
+	context.lineTo(203, 166);
+	context.moveTo(210, 160);
+	context.lineTo(210, 168);
+	context.moveTo(218, 160);
+	context.lineTo(218, 166);
+	context.stroke();*/
 
-function drawFaceThree(){
-	
-	context.lineWidth = 1;
-	context.beginPath();
-	context.moveTo(200, 122);
-	context.lineTo(220, 117);
-	context.stroke();
-}
+	drawFullSmile(195, 150);
 
-function drawFaceFour(){
-	
-	context.lineWidth = 1;
-	context.beginPath();
-	context.moveTo(195, 125);
-	context.bezierCurveTo(195,112,225,112,225,125);
-	context.stroke();
-	
-}
-
-function drawFaceFive(){
-	
-	context.lineWidth = 1;
-	context.beginPath();
-	context.moveTo(195, 120);
-	context.bezierCurveTo(195,114,205,114,205,120);
-	context.moveTo(205, 120);
-	context.bezierCurveTo(205,123,215,123,215,120);
-	context.moveTo(215, 120);
-	context.bezierCurveTo(215,114,225,114,225,120);
-	context.stroke();
-}
-
-function drawFaceSix(){
-	
-	context.lineWidth = 1;
-	context.beginPath();
-	context.moveTo(216, 108);
-	context.bezierCurveTo(216,117,224,117,224,108);
-	context.moveTo(220,102);
-	context.lineTo(216,108);
-	context.moveTo(220,102);
-	context.lineTo(224,108);
-	context.moveTo(195, 125);
-	context.bezierCurveTo(195,112,225,112,225,125);
-	context.stroke();
-}
-
-function drawDeadFace(){
-	drawHead(210, 110);
+	/*context.fillStyle = "#000";
+	context.fillRect(206,175,5,100);*/
+	drawBody(206, 175);
 
 
-	var size = 0;
-	var count = 0;
+	armOrLegPosition(206, 200, 176, 0);
 
-	while (count <= 1){
+	armOrLegPosition(206, 200, 176, 1);
 
-		context.lineWidth = 2;
-		context.moveTo(195 + size, 95);
-		context.lineTo(205 + size,105);
-		context.stroke();
+	armOrLegPosition(206, 274, 320, 0);
 
-		context.moveTo(205 + size, 95);
-		context.lineTo(195 + size, 105);
-		context.stroke();
-
-		count++;
-		size += 20;
-	}
-
-	context.moveTo(195, 115);
-	context.lineTo(225, 115);
-	context.stroke();
-
-	context.beginPath();
-	context.moveTo(214, 122);
-	context.bezierCurveTo(214,131,224,131,224,122);
-	context.stroke();
-	
-	context.moveTo(214,115);
-	context.lineTo(214,122);
-
-	context.moveTo(224,115);
-	context.lineTo(224,122);
-
-	context.moveTo(219,115);
-	context.lineTo(219,120);
-
-	context.stroke();
+	armOrLegPosition(206, 274, 320, 1);
 }
 
 function validateMistakes(mistakes){
 	drawHead(210, 110);
 	if (mistakes == 1){
-		drawFaceOne();
+		drawFaceOne(195, 110);
 	}else if (mistakes == 2){
-		drawBody();
+		drawBody(206, 135);
 		drawFaceTwo();
 	}else if (mistakes == 3){
 		drawArm(mistakes);
@@ -548,7 +331,6 @@ function callSendLetter(e){
 	}
 }
 
-
 document.querySelector("body").onload = clearAll;
 
 document.querySelector("#startgame").onclick = selecionarPalavras;
@@ -558,4 +340,3 @@ document.querySelector("#sendletter").onclick = validateLetter;
 document.querySelector("#newGameButton").onclick = clearAll;
 
 document.querySelector("#letter").onkeypress = callSendLetter;
-
