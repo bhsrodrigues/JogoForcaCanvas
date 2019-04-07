@@ -4,7 +4,7 @@ var context = canvas.getContext("2d");
 function background(fullClean){
 
 	drawGibbet(fullClean);
-	
+
 }
 
 //TODO Remover função após passar corpo com sucesso
@@ -37,9 +37,10 @@ var word = "";
 function selecionarPalavras(){
 	
 	mistakes = 0;
+	getDificulty();
 	lettersOK = 0;
 	
-	var comboitem = document.querySelector("select").value.toLowerCase();
+	var comboitem = document.querySelector("#gameoptions").value.toLowerCase();
 	var selectedItem;
 	
 	if (comboitem == "" ){
@@ -55,7 +56,7 @@ function selecionarPalavras(){
 			selectedItem = movies;
 		}
 
-		alert(comboitem);
+//		alert(comboitem);
 		
 		console.log(selectedItem);
 		
@@ -76,6 +77,49 @@ function selecionarPalavras(){
 		
 	}
 	
+}
+
+function getDificulty(){
+
+	var difficulty = document.querySelector("#difficulty").value.toLowerCase();
+
+	console.log(difficulty + " " + difficulty.length);
+	//console.log("Erros" + mistakes);
+
+	if (difficulty == "normal"){
+		mistakes = 0;
+	}else if(difficulty == "dificil"){
+		mistakes = 2;
+		hard();
+	}else if(difficulty == "muitodificil"){
+		mistakes = 4;
+		veryHard();
+	}else{
+		mistakes = 6;
+		extreme();
+	}
+}
+
+function hard(){
+
+	drawFaceOne();
+	drawBody(206, 175);
+}
+
+function veryHard(){
+	drawFaceFour();
+	drawBody(206, 135);
+	drawArm(1);
+	drawArm(2);
+}
+
+function extreme(){
+	drawFaceSix();
+	drawBody(206, 175);
+	drawArm(1);
+	drawArm(2);
+	drawLeg(1);
+	drawLeg(2);
 }
 
 function getWord(selectedItem){

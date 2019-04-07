@@ -8,18 +8,24 @@
 <body>
 
 <div>
-<select name="gameoptions" id="gameoptions">
-<option></option>
-<!--<option value="bands" >Bandas</option>
-<option value="books" >Livros</option>
-<option value="movies" >Filmes</option>-->
-</select>
-<input type="button" id="startgame" value="Iniciar jogo" />
+    <select name="difficulty" id="difficulty">
+        <option value="normal">Normal</option>
+        <option value="dificil">Difícil</option>
+        <option value="muitodificil">Muito Difícil</option>
+        <option value="extremo">Extremo</option>
+    </select>
+    <select name="gameoptions" id="gameoptions">
+    <option></option>
+    <!--<option value="bands" >Bandas</option>
+    <option value="books" >Livros</option>
+    <option value="movies" >Filmes</option>-->
+    </select>
+    <input type="button" id="startgame" value="Iniciar jogo" />
 
-</select>
-<input type="text" disabled="true" id="letter"/>
-<input type="button" disabled="true" id="sendletter" value=">">
-<input type="button" disabled="true" id="newGameButton" value="Novo Jogo"/>
+    </select>
+    <input type="text" disabled="true" id="letter"/>
+    <input type="button" disabled="true" id="sendletter" value=">">
+    <input type="button" disabled="true" id="newGameButton" value="Novo Jogo"/>
 </div>
 
 <canvas width="800" height="600" id="game">
