@@ -1,0 +1,28 @@
+div:nth-child(1){
+    border-right:  1px solid #555;
+    float: left;
+    width: 13%;
+    margin-right: 9px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+}
+
+option{
+    background-color: #fff;
+}
+
+option[value="normal"]{
+    background-color: #0f0;
+}
+
+option[value="dificil"]{
+    background-color: #ff0;
+}
+
+option[value="muitodificil"]{
+    background-color: #e8a546;
+}
+
+option[value="extremo"]{
+    background-color: #f00;
+}

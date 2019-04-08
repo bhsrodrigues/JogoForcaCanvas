@@ -7,6 +7,22 @@ function background(fullClean){
 
 }
 
+function loadOptionStyle(){
+	var e = document.querySelector("#difficulty");
+	var strUser = e.options[e.selectedIndex];
+	if (strUser.value=="normal"){
+		e.style["background-color"] = "#0f0";
+	}else if(strUser.value=="dificil"){
+		e.style["background-color"] = "#ff0";
+	}else if(strUser.value=="muitodificil"){
+		e.style["background-color"] = "#e8a546";
+	}else if(strUser.value=="extremo"){
+		e.style["background-color"] = "#f00";
+	}else{
+		e.style["background-color"] = "#fff";
+	}
+}
+
 //TODO Remover função após passar corpo com sucesso
 function position(x, y, newY, errors){
 	var value = 35;
@@ -28,7 +44,7 @@ function position(x, y, newY, errors){
 }
 
 var bands = ["Metallica", "Iron Maiden", "Arctic Monkeys"];
-var movies = ["Se beber não case", "Pulp Fiction", "Clube da Luta"];
+//var movies = ["Se beber não case", "Pulp Fiction", "Clube da Luta"];
 var books = ["O iluminado", "A batalha do apocalipse", "Dança da morte"];
 
 
@@ -101,12 +117,13 @@ function getDificulty(){
 }
 
 function hard(){
-
-	drawFaceOne();
-	drawBody(206, 175);
+	drawHead(210,110);
+	drawFaceOne(195,110);
+	drawBody(206, 135);
 }
 
 function veryHard(){
+	drawHead(210,110);
 	drawFaceFour();
 	drawBody(206, 135);
 	drawArm(1);
@@ -114,8 +131,9 @@ function veryHard(){
 }
 
 function extreme(){
+	drawHead(210,110);
 	drawFaceSix();
-	drawBody(206, 175);
+	drawBody(206, 135);
 	drawArm(1);
 	drawArm(2);
 	drawLeg(1);
@@ -376,6 +394,8 @@ function callSendLetter(e){
 }
 
 document.querySelector("body").onload = clearAll;
+
+document.querySelector("#difficulty").onchange = loadOptionStyle;
 
 document.querySelector("#startgame").onclick = selecionarPalavras;
 

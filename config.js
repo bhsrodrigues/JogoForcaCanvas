@@ -19,7 +19,7 @@ for(var position = 0; position < opcoes.length; position++){
 
 
 var bands = ["Metallica", "Iron Maiden", "Arctic Monkeys"];
-var movies = ["Se beber não case", "Pulp Fiction", "Clube da Luta"];
+var movies = /*["Se beber não case", "Pulp Fiction", "Clube da Luta"]*/ ["O Senhor dos aneis as duas torres"];
 var books = ["O iluminado", "A batalha do apocalipse", "Dança da morte"];
 var optionInGame = [bands,movies,books];
 
