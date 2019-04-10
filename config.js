@@ -18,8 +18,8 @@ for(var position = 0; position < opcoes.length; position++){
 }
 
 
-var bands = ["Metallica", "Iron Maiden", "Arctic Monkeys"];
-var movies = /*["Se beber não case", "Pulp Fiction", "Clube da Luta"]*/ ["O Senhor dos aneis as duas torres"];
+var bands = /*["Metallica", "Iron Maiden", "Arctic Monkeys"];*/["a"];
+var movies = /*["Se beber não case", "Pulp Fiction", "Clube da Luta"]*/ ["Borat: o segundo melhor repórter do glorioso país Cazaquistão viaja à América"];
 var books = ["O iluminado", "A batalha do apocalipse", "Dança da morte"];
 var optionInGame = [bands,movies,books];
 

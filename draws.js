@@ -7,7 +7,7 @@ function drawGibbet(fullClean){
 	context.lineWidth = 1;
 
 	if (!fullClean){
-		context.fillRect(0,0,800,400);
+		context.fillRect(0,0,800,365);
 	}else{
 		context.fillRect(0,0,800,600);	
 	}
@@ -93,17 +93,119 @@ function drawWordFields(selectedWord){
 	var position = 50;
 	clearWord();
 	
-	for (var x = 0; x < selectedWord.length; x++){
+	//var lines = Math.floor(selectedWord.length / 26 + 1);
+	
+	var lines = calcLenght(selectedWord);
+	//console.log("Linhas desenho de campos " + lines);
+	var positionY = 400;
+	var substring;
+	var index = 0;
+	console.log(lines);
+	for(var line = 0; line < lines.length; line++){
+		var positionX = 50;
+		//positionY = 450;
 		
-		if (selectedWord.charAt(x) == " "){
-			context.fillStyle = "white";
+		
+
+		if (line == 0){
+			substring = selectedWord.substring(index,lines[line]);
+			index+= lines[line];
+		}else if(line == lines.length - 1){
+			substring = selectedWord.substring(index);
 		}else{
-			context.fillStyle = "black";
+			substring = selectedWord.substring(index,lines[line]+index);
+			index += lines[line];
 		}
+
+		console.log("Index " + index + ", Texto: " + substring);
+
+		//console.log(substring);
+
+		for (var x = 0; x < substring.length; x++){
 		
-		context.fillRect(position,500,21,5);
-		position += 26;	
+			//console.log(selectedWord.charAt(x))
+			if (substring.charAt(x) == " "){
+				context.fillStyle = "white";
+			}else{
+				context.fillStyle = "black";
+			}
+			
+			context.fillRect(positionX,positionY,21,5);
+			positionX += 26;
+			
+		//	console.log("X " + positionX + " Y " + positionY);
+
+		}
+
+		//console.log("Saiu do FOr " + line);
+
+		positionY += 50;
+		
 	}
+	
+}
+
+function calcLenght(selectedWord){
+
+	//console.log("teste");
+
+	var array = selectedWord.split(" ");
+
+	//console.log(array);
+
+	var count = 0;
+	var size = 0;
+	var tempString = "";
+	var arrayPositions = [];
+
+	/*while(count + array[size] < 26){
+		console.log("Antes " + count);
+		tempString += array[size] + " ";
+		size++;
+		count = tempString.length;
+		console.log("Depois " + count);
+	}
+
+	console.log(array);*/
+
+	var position = 0;
+
+	console.log(selectedWord.replace(":",""));
+	//var fullString = "";
+
+	if(selectedWord.length <= 26){
+		arrayPositions.push(selectedWord.length);
+	}else{
+		while(count <= selectedWord.replace(":","").length && size < array.length){
+			tempString += array[size].concat(" ");
+
+			// console.log("Temp : " + tempString);
+
+			// console.log(position + tempString.length);
+
+			if (tempString.length >= 26){
+				arrayPositions.push(count);
+				position = 0;
+				tempString = "";
+			}else{
+				size++;
+				//fullString +=tempString;
+				position = tempString.length
+				count = tempString.length
+			}
+			//count++;
+			// console.log("Full String " + fullString);
+			// console.log("Count " + count);
+		}
+	}
+
+	//console.log(fullString);
+	// console.log(arrayPositions);
+
+	arrayPositions.push(position);
+
+	return arrayPositions;
+
 }
 
 function drawFaceOne(x, y){

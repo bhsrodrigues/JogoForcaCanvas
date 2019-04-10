@@ -43,7 +43,7 @@ function position(x, y, newY, errors){
 	context.stroke();
 }
 
-var bands = ["Metallica", "Iron Maiden", "Arctic Monkeys"];
+//var bands = ["Metallica", "Iron Maiden", "Arctic Monkeys"];
 //var movies = ["Se beber não case", "Pulp Fiction", "Clube da Luta"];
 var books = ["O iluminado", "A batalha do apocalipse", "Dança da morte"];
 
@@ -142,7 +142,7 @@ function extreme(){
 
 function getWord(selectedItem){
 	
-	var item = selectedItem[Math.floor(Math.random() * selectedItem.length)];
+	var item = selectedItem[Math.floor(Math.random() * selectedItem.length)].replace(":","");
 	
 	return item;
 }
@@ -151,12 +151,115 @@ var allLetters = [];
 var correctLetters = [];
 var wrongLetters = [];
 
+
+
+function showLetter(letter, x, y){
+		
+	var lines = calcLenght(word);
+	//var positionY = 450;
+	var newX = x;
+	var substring;
+	var index = 0;
+	for(var line = 0; line < lines.length; line ++){
+		//var positionX = 50;
+		//positionY = 450;
+		
+
+
+
+		/*if (line == 0){
+			substring = word.substring(line,lines[line]);
+		}else if(line == lines.length - 1){
+			substring = word.substring(lines[line]);
+		}else{
+			substring = word.substring(lines[line],lines[line+1]);
+		}*/
+
+		if (line == 0){
+			substring = word.substring(index,lines[line]);
+			index+= lines[line];
+		}else if(line == lines.length - 1){
+			substring = word.substring(index);
+		}else{
+			substring = word.substring(index,lines[line]+index);
+			index += lines[line];
+		}
+		
+		
+		//console.log(substring);
+		
+		for (var charIndex = 0; charIndex < substring.length; charIndex++){
+	
+			//console.log("Letra do jogo " + substring.toLowerCase().charAt(charIndex));
+
+			var result = foundLetter(substring.toLowerCase().charAt(charIndex),letter.toLowerCase());
+
+			//console.log("Resultado " + result);
+
+			if (result[0]){
+				context.font = "20px Arial";
+				context.fillStyle = "black";
+				context.fillText(result[1].toUpperCase(), x + 2, y);
+				context.fillRect(x,y+15,21,5);
+				lettersOK++;
+			}
+
+			//console.log("Letras OK " + lettersOK);	
+
+			x += 26;
+			//console.log("X " + x + " Y " + y);
+		}
+
+		/*for (var x = 0; x < substring.length; x++){
+		
+			//console.log(selectedWord.charAt(x))
+			if (substring.charAt(x) == " "){
+				context.fillStyle = "white";
+			}else{
+				context.fillStyle = "black";
+			}
+			
+			context.fillRect(positionX,positionY,21,5);
+			positionX += 26;
+			
+		//	console.log("X " + positionX + " Y " + positionY);
+
+		}*/
+
+		//console.log("Saiu do FOr " + line);
+
+		y += 50;
+		x = newX;
+	}
+
+	/*for (var charIndex = 0; charIndex < word.length; charIndex++){
+	
+		if (word.toLowerCase().charAt(charIndex) == letter){
+			context.font = "20px Arial";
+			context.fillStyle = "black";
+			context.fillText(letter.toUpperCase(), x + 2, y);
+			context.fillRect(x,y+15,21,5);
+			lettersOK++;
+		}
+		x += 26;
+	}*/
+}
+
 function validateNotAcceptableChar(letter){
 	var notAcceptable = [" ", "-","_","!","1","2","3","4","5","6","7","8","9","0","=","+","§",")","(","*","&","¨",
 				"%","$","#","@","´","`","{","[","^","~",";",":",".",">","<","]","}",")"];
 
 	return notAcceptable.includes(letter);
 }
+
+function sleep(milliseconds) {
+	var start = new Date().getTime();
+	for (var i = 0; i < 1e7; i++) {
+	  if ((new Date().getTime() - start) > milliseconds){
+		break;
+	  }
+	}
+  }
 
 function validateLetter(){
 	var gameWord = removeChars(word);
@@ -180,7 +283,7 @@ function validateLetter(){
 	
 		if (!playedLetterBefore){
 			if (gameWord.toLowerCase().includes(letter)){
-				showLetter(letter, 50, 485);
+				showLetter(letter, 50, 385);
 				correctLetters.push(letter);
 			}else{
 				wrongLetters.push(letter);
@@ -200,9 +303,9 @@ function validateLetter(){
 		if (lettersOK == gameWord.length){
 			background(false);
 			drawWinGame();
-			alert("Parabéns, você finalizou o jogo");
 			disableLetterField(true);
 			disableLetterButton(true);
+			alert("Parabéns, você finalizou o jogo");
 		}
 		
 	}
@@ -228,19 +331,109 @@ function showWrongLetters(x, y){
 	}
 }
 
-function showLetter(letter, x, y){
+function foundLetter(gameLetter, userLetter){
+
+	var result = [false, ""];
+	//var found = false;
+
+	console.log("Letra do jogo " + gameLetter + "|Letra informada " + userLetter);
+
+	/*if (gameLetter == "à" || gameLetter == "á" || gameLetter == "â" || gameLetter == "ã"){
 		
-	for (var charIndex = 0; charIndex < word.length; charIndex++){
-	
-		if (word.toLowerCase().charAt(charIndex) == letter){
-			context.font = "20px Arial";
-			context.fillStyle = "black";
-			context.fillText(letter.toUpperCase(), x + 2, y);
-			context.fillRect(x,y+15,21,5);
-			lettersOK++;
-		}
-		x += 26;
 	}
+
+	if ()
+
+	/*if (gameLetter == userLetter){
+		/*result.push(true);
+		result.push(userLetter);
+		result = [true, gameLetter];
+}*/
+
+	if (userLetter == "a" && validateLetterA(gameLetter)[0]){
+		result = validateLetterA(gameLetter);
+	}else if(userLetter == "e" && validateLetterE(gameLetter)[0]){
+		result = validateLetterE(gameLetter);
+	}else if(userLetter == "i" && validateLetterI(gameLetter)[0]){
+		result = validateLetterI(gameLetter);
+	}else if(userLetter == "o" && validateLetterO(gameLetter)[0]){
+		result = validateLetterO(gameLetter);
+	}else if(userLetter == "u" && validateLetterU(gameLetter)[0]){
+		result = validateLetterU(gameLetter);
+	}else if(userLetter == gameLetter){
+		result = [true,gameLetter];
+	}
+
+	return result;
+}
+
+function validateLetterA(gameLetter){
+
+	var a = ["a","à","á","â","ã"];
+
+	for(var count = 0; count < a.length; count++){
+		if (a[count] == gameLetter){
+			return [true, gameLetter];
+		}
+	}
+
+	return [false,""];
+}
+
+function validateLetterE(gameLetter){
+	
+	var e = ["e","é","è","ê"];
+
+	for(var count = 0; count < e.length; count++){
+		if (e[count] == gameLetter){
+			return [true, gameLetter];
+		}
+	}
+
+	return [false,""];
+
+}
+
+function validateLetterI(gameLetter){
+	
+	var i = ["i","í","ì","î"];
+
+	for(var count = 0; count < i.length; count++){
+		if (i[count] == gameLetter){
+			return [true, gameLetter];
+		}
+	}
+
+	return [false,""];
+
+}
+
+function validateLetterO(gameLetter){
+	
+	var o = ["o","ó","ò","ô","õ"];
+
+	for(var count = 0; count < o.length; count++){
+		if (o[count] == gameLetter){
+			return [true, gameLetter];
+		}
+	}
+
+	return [false,""];
+
+}
+
+function validateLetterU(gameLetter){
+	
+	var u = ["u","ü","ú","ù"];
+
+	for(var count = 0; count < u.length; count++){
+		if (u[count] == gameLetter){
+			return [true, gameLetter];
+		}
+	}
+
+	return [false,""];
+
 }
 
 var mistakes = 0;
@@ -276,7 +469,7 @@ var lettersOK;
 	context.stroke();
 }*/
 
-function drawWinGame(){
+/*function drawWinGame(){
 
 	drawHead(210,150);
 
@@ -305,12 +498,12 @@ function drawWinGame(){
 	context.lineTo(210, 168);
 	context.moveTo(218, 160);
 	context.lineTo(218, 166);
-	context.stroke();*/
+	context.stroke();
 
 	drawFullSmile(195, 150);
 
 	/*context.fillStyle = "#000";
-	context.fillRect(206,175,5,100);*/
+	context.fillRect(206,175,5,100);
 	drawBody(206, 175);
 
 
@@ -321,7 +514,7 @@ function drawWinGame(){
 	armOrLegPosition(206, 274, 320, 0);
 
 	armOrLegPosition(206, 274, 320, 1);
-}
+}*/
 
 function validateMistakes(mistakes){
 	drawHead(210, 110);
