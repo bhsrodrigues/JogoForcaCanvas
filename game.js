@@ -45,7 +45,7 @@ function position(x, y, newY, errors){
 
 //var bands = ["Metallica", "Iron Maiden", "Arctic Monkeys"];
 //var movies = ["Se beber não case", "Pulp Fiction", "Clube da Luta"];
-var books = ["O iluminado", "A batalha do apocalipse", "Dança da morte"];
+//var books = ["O iluminado", "A batalha do apocalipse", "Dança da morte"];
 
 
 var word = "";
@@ -58,18 +58,38 @@ function selecionarPalavras(){
 	
 	var comboitem = document.querySelector("#gameoptions").value.toLowerCase();
 	var selectedItem;
+	var category;
 	
 	if (comboitem == "" ){
 		alert("Selecione um item");
 		document.querySelector("#letter").disabled=true;
 		document.querySelector("#sendletter").disabled=true;
 	}else{
-		if (comboitem == "livros"){
+		/*if (comboitem == "livros"){
 			selectedItem = books;
 		}else if (comboitem == "bandas"){
 			selectedItem = bands;
 		}else{
 			selectedItem = movies;
+		}*/
+
+		console.log(categoryList);
+		console.log(optionsInGame);
+
+		for(var counter = 0; counter < categoryList.length; counter++){
+			if (comboitem == categoryList[counter].toLowerCase()){
+				selectedItem = optionsInGame[counter];
+				category =  categoryList[counter];
+				break;
+			}
+		}
+
+		console.log("Item selecionado: " + selectedItem);
+
+		if (selectedItem == undefined){
+			alert("Categoria " + category + " não tem opções para jogo. " + 
+			"Selecione outra categoria ou informe termos para a categoria em questão.");
+			return;
 		}
 
 //		alert(comboitem);
