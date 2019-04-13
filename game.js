@@ -96,7 +96,7 @@ function selecionarPalavras(){
 		
 		console.log(selectedItem);
 		
-		word = getWord(selectedItem);
+		word = removeChars(getWord(selectedItem), false, true);
 		drawWordFields(word);
 		allLetters = [];
 		wrongLetters = [];
@@ -282,7 +282,7 @@ function sleep(milliseconds) {
   }
 
 function validateLetter(){
-	var gameWord = removeChars(word);
+	var gameWord = removeChars(word, true,false);
 
 	console.log(gameWord);
 	
