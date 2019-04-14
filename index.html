@@ -2,6 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8" />
+    <title>Jogo da Forca</title>
     <link rel="stylesheet" type="text/css" href="styles.css" />
 </head>
 
@@ -9,42 +10,94 @@
 
 
 <body>
+<section>
+    <div>
+        <span>Dificuldade: </span>
+        <select name="difficulty" id="difficulty">
+            <option></option>
+            <option value="normal">Normal</option>
+            <option value="dificil">Difícil</option>
+            <option value="muitodificil">Muito Difícil</option>
+            <option value="extremo">Extremo</option>
+        </select>
+    </div>
+    <div>
+        <select name="gameoptions" id="gameoptions">
+            <option></option>
+        </select>
+        <input type="button" id="startgame" value="Iniciar jogo" />
 
-<div>
-    <span>Dificuldade: </span>
-    <select name="difficulty" id="difficulty">
-        <!--<option></option>-->
-        <option value="normal">Normal</option>
-        <option value="dificil">Difícil</option>
-        <option value="muitodificil">Muito Difícil</option>
-        <option value="extremo">Extremo</option>
-    </select>
-</div>
-<div>
-    <select name="gameoptions" id="gameoptions">
-    <!----><option></option>-->
-    <!--<option value="bands" >Bandas</option>
-    <option value="books" >Livros</option>
-    <option value="movies" >Filmes</option>-->
-    </select>
-    <input type="button" id="startgame" value="Iniciar jogo" />
+        <label>Letra: </label><input type="text" disabled="true" id="letter" maxlength="1"/>
+        <input type="button" disabled="true" id="sendletter" value=">">
+        <input type="button" disabled="true" id="newGameButton" value="Novo Jogo"/>
+        
+    </div>
+    <span>Informe uma letra</span>
+</section>
 
-    </select>
-    <input type="text" disabled="true" id="letter" maxlength="1"/>
-    <input type="button" disabled="true" id="sendletter" value=">">
-    <input type="button" disabled="true" id="newGameButton" value="Novo Jogo"/>
-</div>
+<main>
+    <canvas width="800" height="600" id="game">
 
-<canvas width="800" height="600" id="game">
+    </canvas>
 
-</canvas>
+    <article>
+        <h2>Regras do jogo:</h2>
 
+        <ol>
+            <li>
+                Inicialmente você terá de escolher a dificuldade, sendo nesse caso o limite de erros permitidos, conforme abaixo:
+                <ul>
+                    <li>Normal: 6 erros</li>
+                    <li>Normal: 4 erros</li>
+                    <li>Muito difícil: 2 erros</li>
+                    <li>Extremo: 0 erros</li>
+                </ul>
+            </li>
+            <li>
+                Depois será necessário escolher uma das categorias de termos para o jogo. 
+                Caso a categoria não tenha termo, o jogo não será iniciado;
+            </li>
+            <li>
+                Após o jogo ser iniciado, serão exibidos o total de termos no canto inferior do desenho da forca
+                e o "corpo", sinalizando o quanto falta para perder. 
+            </li>
+            <li>
+                É permitido enviar apenas uma letra/número por vez, sendo já limitado pelo próprio campo.
+                <ul>
+                    <li>Não é permitido informar caracteres especiais (pontuação, acentos). Se 
+                        for informado, será apresentada mensagem de erro;
+                    </li>
+                    <li>Não é necessário informar vogais acentuadas. O sistema fará isso automaticamente 
+                        ao informar uma vogal sem acentuação.
+                    </li>
+                    <li>
+                        Se não for infomada uma letra, será apresentada uma notificação em tela.
+                    </li>
+                </ul>
+            </li>
+            <li>
+                Caso uma letra esteja incorreta, a mesma será exibida em vermelho e 
+                o corpo será atualizado conforme o número de erros cometidos.
+            </li>
+            <li>
+                Caso saiba a palavra/termo,, deverá informar letra a letra até o jogo ser finalizado.
+            </li>
+            <li>
+                Caso acerte o termo, o jogo será finalizado e o mesmo aparecerá preenchido.
+            </li>
+            <li>
+                Caso perca o jogo, o mesmo será finalizado e não será exibido qual o termo escolhido.
+            </li>
+            <li>
+                É possível selecionar um novo jogo ao ganhar, perder ou no meio do jogo atual.
+            </li>
+        </ol>
+    </article>
+</main>
 <script type="text/javascript" src="gameInfo.js"></script>
 <script type="text/javascript" src="loadconfig.js"></script>
 <script type="text/javascript" src="draws.js"></script>
 <script type="text/javascript" src="game.js"></script>
-
-
 
 </body>
 </html>

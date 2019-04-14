@@ -23,7 +23,6 @@ function drawGibbet(fullClean){
 	context.strokeRect(0,0,800,600);
 }
 
-//x = 210, y = 110
 function drawHead(x, y){
 	
 	context.fillStyle = "white";
@@ -46,7 +45,6 @@ function drawHead(x, y){
 }
 
 
-//x = 206, y = 135
 function drawBody(x, y){
 	
 	context.fillStyle = "black";
@@ -90,22 +88,15 @@ function clearWord(){
 
 function drawWordFields(selectedWord){
 	
-	var position = 50;
 	clearWord();
 	
-	//var lines = Math.floor(selectedWord.length / 26 + 1);
-	
 	var lines = calcLenght(selectedWord);
-	//console.log("Linhas desenho de campos " + lines);
 	var positionY = 400;
 	var substring;
 	var index = 0;
-	console.log(lines);
+	
 	for(var line = 0; line < lines.length; line++){
 		var positionX = 50;
-		//positionY = 450;
-		
-		
 
 		if (line == 0){
 			substring = selectedWord.substring(index,lines[line]);
@@ -117,13 +108,8 @@ function drawWordFields(selectedWord){
 			index += lines[line];
 		}
 
-		console.log("Index " + index + ", Texto: " + substring);
-
-		//console.log(substring);
-
 		for (var x = 0; x < substring.length; x++){
 		
-			//console.log(selectedWord.charAt(x))
 			if (substring.charAt(x) == " "){
 				context.fillStyle = "white";
 			}else{
@@ -132,12 +118,8 @@ function drawWordFields(selectedWord){
 			
 			context.fillRect(positionX,positionY,21,5);
 			positionX += 26;
-			
-		//	console.log("X " + positionX + " Y " + positionY);
 
 		}
-
-		//console.log("Saiu do FOr " + line);
 
 		positionY += 50;
 		
@@ -147,41 +129,21 @@ function drawWordFields(selectedWord){
 
 function calcLenght(selectedWord){
 
-	//console.log("teste");
-
 	var array = selectedWord.split(" ");
-
-	//console.log(array);
 
 	var count = 0;
 	var size = 0;
 	var tempString = "";
 	var arrayPositions = [];
 
-	/*while(count + array[size] < 26){
-		console.log("Antes " + count);
-		tempString += array[size] + " ";
-		size++;
-		count = tempString.length;
-		console.log("Depois " + count);
-	}
-
-	console.log(array);*/
-
 	var position = 0;
-
-	console.log(selectedWord.replace(":",""));
-	//var fullString = "";
 
 	if(selectedWord.length <= 26){
 		arrayPositions.push(selectedWord.length);
 	}else{
+		selectedWord = removeChars(selectedWord,false,false,true);
 		while(count <= selectedWord.replace(":","").length && size < array.length){
 			tempString += array[size].concat(" ");
-
-			// console.log("Temp : " + tempString);
-
-			// console.log(position + tempString.length);
 
 			if (tempString.length >= 26){
 				arrayPositions.push(count);
@@ -189,18 +151,11 @@ function calcLenght(selectedWord){
 				tempString = "";
 			}else{
 				size++;
-				//fullString +=tempString;
 				position = tempString.length
 				count = tempString.length
 			}
-			//count++;
-			// console.log("Full String " + fullString);
-			// console.log("Count " + count);
 		}
 	}
-
-	//console.log(fullString);
-	// console.log(arrayPositions);
 
 	arrayPositions.push(position);
 
@@ -210,37 +165,9 @@ function calcLenght(selectedWord){
 
 function drawFaceOne(x, y){
 
-	drawFullSmile(x, y)
-	//context.fillStyle = "white";
-	/*context.strokeStyle = "black";
-	
-	context.beginPath();
-	context.moveTo(195, 110);
-	context.bezierCurveTo(195,125,225,125,225,110);
-	context.stroke();
-	
-	context.beginPath();
-	context.moveTo(195, 110);
-	context.bezierCurveTo(195,130,225,130,225,110);
-	context.stroke();
-	
-	context.beginPath();
-	context.moveTo(195, 110);
-	context.bezierCurveTo(195,135,225,135,225,110);
-	context.stroke();
-	
-	context.lineWidth = 1;
-	context.beginPath();
-	context.moveTo(203, 120);
-	context.lineTo(203, 126);
-	context.moveTo(210, 120);
-	context.lineTo(210, 128);
-	context.moveTo(218, 120);
-	context.lineTo(218, 126);
-	context.stroke();*/
+	drawFullSmile(x, y);
 }
 
-//x = 195 y = 110
 function drawFullSmile(x, y){
 	context.strokeStyle = "black";
 	
@@ -258,29 +185,8 @@ function drawFullSmile(x, y){
 		count+=5;
 	}
 
-	/*context.beginPath();
-	context.moveTo(195, 110);
-	context.bezierCurveTo(195,125,225,125,225,110);
-	context.stroke();
-	
-	context.beginPath();
-	context.moveTo(195, 110);
-	context.bezierCurveTo(195,130,225,130,225,110);
-	context.stroke();
-	
-	context.beginPath();
-	context.moveTo(195, 110);
-	context.bezierCurveTo(195,135,225,135,225,110);
-	context.stroke();*/
 	
 	context.lineWidth = 1;
-	/*context.beginPath();
-	context.moveTo(203, 120);
-	context.lineTo(203, 126);
-	context.moveTo(210, 120);
-	context.lineTo(210, 128);
-	context.moveTo(218, 120);
-	context.lineTo(218, 126);*/
 
 	context.beginPath();
 	context.moveTo(x + 8, y + 10);
@@ -405,37 +311,10 @@ function drawWinGame(){
 
 	context.strokeStyle = "black";
 	
-	/*context.beginPath();
-	context.moveTo(195, 150);
-	context.bezierCurveTo(195,165,225,165,225,150);
-	context.stroke();
-	
-	context.beginPath();
-	context.moveTo(195, 150);
-	context.bezierCurveTo(195,170,225,170,225,150);
-	context.stroke();
-	
-	context.beginPath();
-	context.moveTo(195, 150);
-	context.bezierCurveTo(195,175,225,175,225,150);
-	context.stroke();
-	
-	context.lineWidth = 1;
-	context.beginPath();
-	context.moveTo(203, 160);
-	context.lineTo(203, 166);
-	context.moveTo(210, 160);
-	context.lineTo(210, 168);
-	context.moveTo(218, 160);
-	context.lineTo(218, 166);
-	context.stroke();*/
 
 	drawFullSmile(195, 150);
 
-	/*context.fillStyle = "#000";
-	context.fillRect(206,175,5,100);*/
 	drawBody(206, 175);
-
 
 	armOrLegPosition(206, 200, 176, 0);
 

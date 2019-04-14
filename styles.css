@@ -3,6 +3,9 @@ div:nth-child(1){
     float: left;
     width: 13%;
     margin-right: 9px;
+}
+
+body{
     font-family: Arial, Helvetica, sans-serif;
     font-size: 13px;
 }
@@ -15,6 +18,7 @@ option[value="normal"]{
     background-color: #0f0;
 }
 
+
 option[value="dificil"]{
     background-color: #ff0;
 }
@@ -25,4 +29,36 @@ option[value="muitodificil"]{
 
 option[value="extremo"]{
     background-color: #f00;
+}
+
+div:nth-child(2){
+    float: left;
+    width: auto;
+}
+
+section > span {
+    float: left;
+    margin-left: 30.7%;
+    clear: both;
+    display: none;
+    color: #f00;
+}
+
+section {
+    overflow: auto;
+}
+
+canvas{
+    float: left;
+    margin-top: 2%;
+}
+
+article{
+    margin-top: 0.8%;
+    float: left;
+    width: 37%;
+}
+
+article > h2{
+    margin-left: 5%;
 }
