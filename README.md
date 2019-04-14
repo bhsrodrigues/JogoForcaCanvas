@@ -1,4 +1,4 @@
-##Jogo de Forca##
+#Jogo de Forca#
 
 Projeto para estudo de javascript, onde foi feito um jogo de forca. 
 
